@@ -3,11 +3,6 @@
 
 /**
  * @brief Checks if `str` starts with `match` up to `maxlen` characters.
- *
- * @param str [TODO:parameter]
- * @param match [TODO:parameter]
- * @param maxlen [TODO:parameter]
- * @return [TODO:return]
  */
 bool strprefix(char *str, char *match, int maxlen) {
     while (maxlen > 0) {

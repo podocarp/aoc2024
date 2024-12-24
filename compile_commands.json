@@ -1,34 +1,402 @@
 [
   {
     "arguments": [
-      "/nix/store/v39c0h6xv6hvki2k1bsyp5n090q8y2bp-clang-wrapper-16.0.6/bin/clang",
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
       "-c",
       "-Wall",
       "-Wextra",
       "-Werror",
       "-Ilib",
       "-o",
-      "problems/1/sol",
-      "problems/1/sol.c"
+      "problems/01/sol",
+      "problems/01/sol.c"
     ],
     "directory": "/Users/bytedance/Documents/aoc2024",
-    "file": "/Users/bytedance/Documents/aoc2024/problems/1/sol.c",
-    "output": "/Users/bytedance/Documents/aoc2024/problems/1/sol"
+    "file": "/Users/bytedance/Documents/aoc2024/problems/01/sol.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/01/sol"
   },
   {
     "arguments": [
-      "/nix/store/v39c0h6xv6hvki2k1bsyp5n090q8y2bp-clang-wrapper-16.0.6/bin/clang",
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
       "-c",
       "-Wall",
       "-Wextra",
       "-Werror",
       "-Ilib",
       "-o",
-      "problems/1/sol",
+      "problems/01/sol",
+      "lib/fmt.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/fmt.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/01/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/01/sol",
+      "lib/graph.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/graph.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/01/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/01/sol",
       "lib/sort.c"
     ],
     "directory": "/Users/bytedance/Documents/aoc2024",
     "file": "/Users/bytedance/Documents/aoc2024/lib/sort.c",
-    "output": "/Users/bytedance/Documents/aoc2024/problems/1/sol"
+    "output": "/Users/bytedance/Documents/aoc2024/problems/01/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/01/sol",
+      "lib/strings.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/strings.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/01/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/02/sol",
+      "problems/02/sol.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/problems/02/sol.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/02/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/02/sol",
+      "lib/fmt.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/fmt.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/02/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/02/sol",
+      "lib/graph.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/graph.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/02/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/02/sol",
+      "lib/sort.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/sort.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/02/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/02/sol",
+      "lib/strings.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/strings.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/02/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/03/sol",
+      "problems/03/sol.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/problems/03/sol.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/03/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/03/sol",
+      "lib/fmt.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/fmt.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/03/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/03/sol",
+      "lib/graph.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/graph.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/03/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/03/sol",
+      "lib/sort.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/sort.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/03/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/03/sol",
+      "lib/strings.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/strings.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/03/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/04/sol",
+      "problems/04/sol.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/problems/04/sol.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/04/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/04/sol",
+      "lib/fmt.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/fmt.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/04/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/04/sol",
+      "lib/graph.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/graph.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/04/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/04/sol",
+      "lib/sort.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/sort.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/04/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/04/sol",
+      "lib/strings.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/strings.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/04/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/05/sol",
+      "problems/05/sol.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/problems/05/sol.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/05/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/05/sol",
+      "lib/fmt.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/fmt.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/05/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/05/sol",
+      "lib/graph.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/graph.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/05/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/05/sol",
+      "lib/sort.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/sort.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/05/sol"
+  },
+  {
+    "arguments": [
+      "/nix/store/3hq83bgy41m9xpifm3hknjf96v75sg33-gcc-wrapper-13.3.0/bin/gcc",
+      "-c",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Ilib",
+      "-o",
+      "problems/05/sol",
+      "lib/strings.c"
+    ],
+    "directory": "/Users/bytedance/Documents/aoc2024",
+    "file": "/Users/bytedance/Documents/aoc2024/lib/strings.c",
+    "output": "/Users/bytedance/Documents/aoc2024/problems/05/sol"
   }
 ]

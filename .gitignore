@@ -53,6 +53,7 @@ dkms.conf
 
 .direnv
 .cache
+.ccls-cache
 
 # solution binary produced
 sol

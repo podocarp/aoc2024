@@ -1,8 +1,8 @@
 CC = clang
-CFLAGS = -Wall -Wextra -Werror -Ilib
+CFLAGS = -Wall -Wextra -Werror -Wno-unused-function -Ilib -g -O0
 
 SHARED_SRC = $(wildcard lib/*.c)
-SHARED_HEADERS = lib/aoc.h
+SHARED_HEADERS = lib/aoc.h lib/list.h
 
 SRC_DIRS := $(wildcard problems/*/)
 SRC_FILES := $(foreach dir, $(SRC_DIRS), $(wildcard $(dir)sol.c))
