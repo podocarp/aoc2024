@@ -17,8 +17,17 @@ static unsigned long hash(char *key) {
     return hash;
 }
 
+#define T char *
+#define LIST list_s
+#define ZERO_VALUE ""
+#include "list.h"
+
 typedef struct hashmap {
+    // a list of keys in insert order
+    list_s *ordered_keys;
+    // buckets for keys
     char **keys;
+    // buckets for their values
     char **values;
     uint len;
     uint capacity;
@@ -26,6 +35,7 @@ typedef struct hashmap {
 
 hashmap *hashmap_new() {
     hashmap *h = malloc(sizeof(hashmap));
+    h->ordered_keys = list_s_new(10);
     h->keys = calloc(10, sizeof(char *));
     h->values = calloc(10, sizeof(char *));
     h->len = 0;
@@ -42,6 +52,7 @@ void hashmap_free(hashmap *hm) {
             free(hm->values[i]);
         }
     }
+    free(hm->ordered_keys);
     free(hm->keys);
     free(hm->values);
     free(hm);
@@ -65,6 +76,7 @@ static void set(hashmap *hm, char *key, char *value) {
     }
     hm->keys[index] = key;
     hm->values[index] = value;
+    list_s_push(hm->ordered_keys, key);
     hm->len++;
 }
 
@@ -130,6 +142,17 @@ char *hashmap_get(hashmap *hm, char *key) {
 
     return NULL;
 }
+
+/** Returns the key of the i-th element in the hashmap. The order is not by
+ * insertion order, but remains the same unless inserts have been performed. You
+ * can use this to iterate through all elements, by using hashmap_len to get the
+ * upper bound. But note that any inserts during your iteration will mess it up!
+ */
+inline char *hashmap_get_i(hashmap *hm, int i) {
+    return hm->ordered_keys->items[i];
+}
+
+inline int hashmap_len(hashmap *hm) { return hm->len; }
 
 void printhm(hashmap *hm) {
     for (uint i = 0; i < hm->capacity; i++) {

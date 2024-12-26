@@ -97,6 +97,8 @@ void test_hashmap() {
         assert(res != NULL);
         assert(strcmp(res, testsuite[i][1]) == 0);
     }
+
+    hashmap_free(hm);
 }
 
 void test_graph_fully_connected() {
@@ -118,9 +120,11 @@ void test_graph_fully_connected() {
 
     for (int i = 0; i < numNodes; i++) {
         for (int j = 0; j < numNodes; j++) {
-            assert(graph_bfs(g, nodes[i], nodes[j]));
+            assert(graph_dfs(g, nodes[i], nodes[j]));
         }
     }
+
+    graph_free(g);
 }
 
 void test_graph() {
@@ -146,9 +150,11 @@ void test_graph() {
     graph_insert_edge(g, "F", "B");
     graph_insert_edge(g, "F", "C");
 
-    assert(graph_bfs(g, "A", "D"));
-    assert(!graph_bfs(g, "E", "A"));
-    assert(!graph_bfs(g, "A", "F"));
+    assert(graph_dfs(g, "A", "D"));
+    assert(!graph_dfs(g, "E", "A"));
+    assert(!graph_dfs(g, "A", "F"));
+
+    graph_free(g);
 }
 
 void test_subgraph() {
@@ -174,8 +180,72 @@ void test_subgraph() {
     assert(!graph_contains(s, "D"));
     assert(!graph_contains(s, "E"));
     assert(!graph_contains(s, "F"));
-    assert(graph_bfs(s, "A", "C"));
-    assert(!graph_bfs(s, "A", "B"));
+    assert(graph_dfs(s, "A", "C"));
+    assert(!graph_dfs(s, "A", "B"));
+
+    graph_free(g);
+    graph_free(s);
+}
+
+void test_graph_sinks_sources() {
+    graph *g = graph_new();
+    graph_insert_node(g, "A");
+    graph_insert_node(g, "B");
+    graph_insert_node(g, "C");
+    graph_insert_node(g, "D");
+    graph_insert_node(g, "E");
+    graph_insert_node(g, "F");
+
+    graph_insert_edge(g, "A", "B");
+    graph_insert_edge(g, "B", "D");
+    graph_insert_edge(g, "D", "E");
+    graph_insert_edge(g, "F", "A");
+
+    char *ids[6];
+    int cnt = graph_find_sinks(g, ids);
+    assert(cnt == 2);
+    graph *sg = graph_subgraph(g, ids, cnt);
+    assert(graph_contains(sg, "C"));
+    assert(graph_contains(sg, "E"));
+    assert(!graph_contains(sg, "A"));
+    assert(!graph_contains(sg, "B"));
+
+    cnt = 0;
+    cnt = graph_find_sources(g, ids);
+    assert(cnt == 2);
+    sg = graph_subgraph(g, ids, cnt);
+    assert(graph_contains(sg, "C"));
+    assert(graph_contains(sg, "F"));
+    assert(!graph_contains(sg, "A"));
+    assert(!graph_contains(sg, "B"));
+
+    graph_free(g);
+    graph_free(sg);
+}
+
+void test_graph_toposort() {
+    graph *g = graph_new();
+    graph_insert_node(g, "A");
+    graph_insert_node(g, "B");
+    graph_insert_node(g, "C");
+    graph_insert_node(g, "D");
+    graph_insert_node(g, "E");
+    graph_insert_node(g, "F");
+
+    graph_insert_edge(g, "A", "B");
+    graph_insert_edge(g, "B", "D");
+    graph_insert_edge(g, "D", "C");
+    graph_insert_edge(g, "C", "E");
+    graph_insert_edge(g, "E", "F");
+
+    char *ans[] = {"A", "B", "D", "C", "E", "F"};
+    char *res[6];
+    assert(graph_topo_sort(g, res));
+
+    for (int i = 0; i < 6; i++) {
+        assert(strcmp(ans[i], res[i]) == 0);
+    }
+    graph_free(g);
 }
 
 int main() {
@@ -186,4 +256,6 @@ int main() {
     TEST(test_hashmap)
     TEST(test_graph)
     TEST(test_subgraph)
+    TEST(test_graph_sinks_sources)
+    TEST(test_graph_toposort)
 }

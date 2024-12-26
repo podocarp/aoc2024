@@ -1,5 +1,5 @@
-CC = clang
-CFLAGS = -Wall -Wextra -Werror -Wno-unused-function -Ilib -g -O0
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror -Ilib -g -O0 -std=c23
 
 SHARED_SRC = $(wildcard lib/*.c)
 SHARED_HEADERS = lib/aoc.h lib/list.h

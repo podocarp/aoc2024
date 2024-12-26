@@ -55,9 +55,21 @@ static LIST *LIST_NEW(int capacity) {
 #endif
     return l;
 }
-#undef LIST_NEW
 
-#define LIST_RESIZE JOIN(METHOD_PREFIX, resize)
+#define LIST_CONVERT_INDEX JOIN(METHOD_PREFIX, zz_internal_convert_index)
+static int LIST_CONVERT_INDEX(LIST *lst, int index) {
+    int real_index = index;
+    if (index < 0) {
+        real_index += lst->len;
+    }
+    if (real_index < 0 || (unsigned int)real_index >= lst->len) {
+        fprintf(stderr, "List index %d out of bounds.", index);
+        abort();
+    }
+    return real_index;
+}
+
+#define LIST_RESIZE JOIN(METHOD_PREFIX, zz_internal_resize)
 /** Resizes the list. If `cap` is not enough to contain all the elements in the
  * list, nothing is done.
  */
@@ -77,12 +89,9 @@ inline static void LIST_RESIZE(LIST *lst, size_t cap) {
 #define LIST_INSERT JOIN(METHOD_PREFIX, insert)
 /** Inserts `item` at 0-based position `index`.
  */
-static void LIST_INSERT(LIST *lst, T item, int index) {
+__attribute__((unused)) static void LIST_INSERT(LIST *lst, T item, int index) {
     if (lst->len >= lst->capacity) {
-        size_t new_cap = lst->capacity * 2;
-        LIST_RESIZE(lst, new_cap);
-        lst->items = realloc(lst->items, new_cap * sizeof(T));
-        lst->capacity = new_cap;
+        LIST_RESIZE(lst, lst->capacity * 2);
     }
     for (size_t i = index; i < lst->len; i++) {
         lst->items[i + 1] = lst->items[i];
@@ -93,39 +102,56 @@ static void LIST_INSERT(LIST *lst, T item, int index) {
 #define LIST_PUSH JOIN(METHOD_PREFIX, push)
 /** Appends to the end of the list.
  */
-inline static void LIST_PUSH(LIST *lst, T item) {
+__attribute__((unused)) inline static void LIST_PUSH(LIST *lst, T item) {
     LIST_INSERT(lst, item, lst->len++);
 }
-#undef LIST_RESIZE
-#undef LIST_INSERT
-#undef LIST_PUSH
+
+#define LIST_DELETE JOIN(METHOD_PREFIX, delete)
+__attribute__((unused)) static void LIST_DELETE(LIST *lst, int index) {
+    int real_index = LIST_CONVERT_INDEX(lst, index);
+    for (unsigned int i = real_index; i < lst->len; i++) {
+        lst->items[i] = lst->items[i + 1];
+    }
+    lst->len--;
+}
 
 #define LIST_POP JOIN(METHOD_PREFIX, pop)
 /** Returns the last element in the list. No bounds checking is performed. To
  * prevent serious damage, check `lst->len > 0` before calling.
  */
-static T LIST_POP(LIST *lst) { return lst->items[--lst->len]; }
+__attribute__((unused)) static T LIST_POP(LIST *lst) {
+    return lst->items[--lst->len];
+}
 
 #define LIST_SET JOIN(METHOD_PREFIX, set)
-static void LIST_SET(LIST *lst, T item, int index) { lst->items[index] = item; }
-#undef LIST_SET
+__attribute__((unused)) static void LIST_SET(LIST *lst, T item, int index) {
+    int real_index = LIST_CONVERT_INDEX(lst, index);
+    lst->items[real_index] = item;
+}
 
 #define LIST_GET JOIN(METHOD_PREFIX, get)
 /** Gets the item stored at `index`. Negative indexing is allowed.
  */
-static T LIST_GET(LIST *lst, int index) {
-    int real_index = index;
-    if (index < 0) {
-        real_index += lst->len;
-    }
-    if (real_index < 0 || (unsigned int)real_index >= lst->len) {
-        fprintf(stderr, "List index %d out of bounds.", index);
-        abort();
-    }
+__attribute__((unused)) static T LIST_GET(LIST *lst, int index) {
+    int real_index = LIST_CONVERT_INDEX(lst, index);
     return lst->items[real_index];
 }
-#undef LIST_GET
 
+#define LIST_FREE JOIN(METHOD_PREFIX, free)
+__attribute__((unused)) static void LIST_FREE(LIST *lst) {
+    free(lst->items);
+    free(lst);
+}
+
+#undef LIST_NEW
+#undef LIST_DELETE
+#undef LIST_SET
+#undef LIST_GET
+#undef LIST_FREE
+#undef LIST_RESIZE
+#undef LIST_INSERT
+#undef LIST_PUSH
+#undef LIST_CONVERT_INDEX
 #undef T
 #undef STRUCT_NAME
 #undef LIST

@@ -13,8 +13,8 @@
         with pkgs;
         mkShell {
           buildInputs = [
-            lldb
-            clang
+            lldb # gdb not supported on darwin
+            gcc14
           ];
 
           LLDB_DEBUGSERVER_PATH = "/Applications/Xcode.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/Resources/debugserver";

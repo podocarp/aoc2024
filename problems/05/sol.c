@@ -1,63 +1,71 @@
 #include "aoc.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <strings.h>
 
 #define NUM_NODES 100
 #define IGNORE_THIS_NODE -1
 
-bool adj_matrix[NUM_NODES][NUM_NODES];
-
-void add_edge(int from, int to) {
-    if (to == IGNORE_THIS_NODE || from == IGNORE_THIS_NODE) {
-        return;
-    }
-    adj_matrix[from][to] = true;
+static char tmpbuf[20];
+static char tmpbuf2[20];
+static void graph_insert_i(graph *g, int id) {
+    itoa(id, tmpbuf);
+    graph_insert_node(g, tmpbuf);
 }
-
-bool has_edge(int from, int to) {
-    if (to == IGNORE_THIS_NODE || from == IGNORE_THIS_NODE) {
-        return false;
-    }
-    return adj_matrix[from][to];
+static void graph_insert_edge_ii(graph *g, int from, int to) {
+    itoa(from, tmpbuf);
+    itoa(to, tmpbuf2);
+    graph_insert_edge(g, tmpbuf, tmpbuf2);
 }
-
-bool is_connected(int from, int to) {
-    int stack[NUM_NODES];
-    int *ptr = stack;
-    for (int i = 0; i < NUM_NODES; i++) {
-        stack[i] = IGNORE_THIS_NODE;
-    }
-    *ptr++ = from;
-
-    while (ptr != stack) {
-        int node = *--ptr;
-        if (node == to) {
-            return true;
+graph *graph_subgraph_i(graph *g, int nodes[]) {
+    char *ids[NUM_NODES] = {};
+    int i = 0;
+    for (; i < NUM_NODES; i++) {
+        if (nodes[i] == IGNORE_THIS_NODE) {
+            break;
         }
-
-        for (int i = 0; i < NUM_NODES; i++) {
-            if (has_edge(node, i)) {
-                *ptr++ = i;
-            }
+        char buf[100];
+        itoa(nodes[i], buf);
+        ids[i] = strdup(buf);
+    }
+    for (int j = 0; j < NUM_NODES; j++) {
+        if (ids[j] == NULL) {
+            break;
         }
     }
-    return false;
+    graph *s = graph_subgraph(g, ids, i);
+    return s;
+}
+bool dfs(graph *g, int from, int to) {
+    itoa(from, tmpbuf);
+    itoa(to, tmpbuf2);
+    return graph_dfs(g, tmpbuf, tmpbuf2);
 }
 
-// TODO: What about those that you should ignore?
-bool test_order(int *nodes) {
+bool test_order(graph *g, int nodes[]) {
+    graph *sg = graph_subgraph_i(g, nodes);
     int prev = nodes[0];
     for (int i = 1; i < NUM_NODES; i++) {
         int curr = nodes[i];
         if (curr == IGNORE_THIS_NODE) {
             break;
         }
-        if (!is_connected(prev, curr)) {
+        if (!dfs(sg, prev, curr)) {
             return false;
         }
+        prev = curr;
     }
 
     return true;
+}
+
+int fix_order(graph *g, int nodes[]) {
+    graph *sg = graph_subgraph_i(g, nodes);
+    int len = graph_num_nodes(sg);
+    char *sort[100];
+    graph_topo_sort(sg, sort);
+    char *mid = sort[len / 2];
+    return atoi(mid);
 }
 
 int main(int argc, char *argv[]) {
@@ -72,42 +80,40 @@ int main(int argc, char *argv[]) {
         return EXIT_FAILURE;
     }
 
-    for (int i = 0; i < NUM_NODES; i++) {
-        for (int j = 0; j < NUM_NODES; j++) {
-            adj_matrix[i][j] = false;
-        }
-    }
-
     char buf[100];
-    int mode = 1;
     int sum = 0;
+    int sum2 = 0;
+    graph *g = graph_new();
     while (fgets(buf, 100, file) != NULL) {
         if (buf[0] == '\n') {
-            mode = 2;
-            continue;
+            break;
         }
 
-        if (mode == 1) {
-            int before, after;
-            sscanf(buf, "%d|%d", &before, &after);
-            add_edge(before, after);
-        } else if (mode == 2) {
-            int nodes[NUM_NODES];
-            for (int i = 0; i < NUM_NODES; i++) {
-                nodes[i] = IGNORE_THIS_NODE;
-            }
-            char *ptr = buf;
-            int offset = 0, cnt = 0;
-            while (sscanf(ptr, "%d%*[,]%n", nodes + cnt, &offset) && *ptr) {
-                cnt++;
-                ptr += offset;
-            }
+        int before, after;
+        sscanf(buf, "%d|%d", &before, &after);
+        graph_insert_i(g, before);
+        graph_insert_i(g, after);
+        graph_insert_edge_ii(g, before, after);
+    }
 
-            if (test_order(nodes)) {
-                sum += nodes[cnt / 2];
-            }
+    while (fgets(buf, 100, file) != NULL) {
+        int nodes[NUM_NODES];
+        for (int i = 0; i < NUM_NODES; i++) {
+            nodes[i] = IGNORE_THIS_NODE;
+        }
+        char *ptr = buf;
+        int offset = 0, cnt = 0;
+        while (sscanf(ptr, "%d%*[,]%n", nodes + cnt, &offset) && *ptr) {
+            cnt++;
+            ptr += offset;
+        }
+
+        if (test_order(g, nodes)) {
+            sum += nodes[cnt / 2];
+        } else {
+            sum2 += fix_order(g, nodes);
         }
     }
 
-    printf("%d\n", sum);
+    printf("%d\n%d\n", sum, sum2);
 }
