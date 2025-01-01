@@ -106,10 +106,6 @@ static void hashmap_expand(hashmap *hm) {
     free(old_keys);
     free(old_values);
 }
-
-/** Sets the mapping between the two 0-terminated strings `key` and `value`. No
- * checking is performed on the two strings.
- */
 void hashmap_set(hashmap *hm, char *key, char *value) {
     char *key_copy = strdup(key);
     char *value_copy = strdup(value);
@@ -119,9 +115,6 @@ void hashmap_set(hashmap *hm, char *key, char *value) {
     set(hm, key_copy, value_copy);
 }
 
-/** Returns the corresponding value for this key if present, otherwise returns
- * NULL.
- */
 char *hashmap_get(hashmap *hm, char *key) {
     if (key == NULL) {
         return NULL;
@@ -143,11 +136,6 @@ char *hashmap_get(hashmap *hm, char *key) {
     return NULL;
 }
 
-/** Returns the key of the i-th element in the hashmap. The order is not by
- * insertion order, but remains the same unless inserts have been performed. You
- * can use this to iterate through all elements, by using hashmap_len to get the
- * upper bound. But note that any inserts during your iteration will mess it up!
- */
 inline char *hashmap_get_i(hashmap *hm, int i) {
     return hm->ordered_keys->items[i];
 }
@@ -159,7 +147,7 @@ void printhm(hashmap *hm) {
         char *key = hm->keys[i];
         char *value = hm->values[i];
         if (key != NULL) {
-            printf("%s: %s, ", key, value);
+            printf("\"%s\": \"%s\", ", key, value);
         }
     }
     puts("");

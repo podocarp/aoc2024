@@ -21,11 +21,24 @@ bool strprefix(char *str, char *match, int maxlen);
 typedef struct hashmap hashmap;
 
 hashmap *hashmap_new();
+/** Sets the mapping between the two 0-terminated strings `key` and `value`. No
+ * checking is performed on the two strings.
+ */
 void hashmap_set(hashmap *hm, char *key, char *value);
+/** Returns the corresponding value for this key if present, otherwise returns
+ * NULL.
+ */
 char *hashmap_get(hashmap *hm, char *key);
 void hashmap_free(hashmap *hm);
 int hashmap_len(hashmap *hm);
+/** Returns the key of the i-th element in the hashmap. The order is not by
+ * insertion order, but remains the same unless inserts have been performed. You
+ * can use this to iterate through all elements, by using hashmap_len to get the
+ * upper bound. But note that any inserts during your iteration will mess it up!
+ */
 char *hashmap_get_i(hashmap *hm, int i);
+/** Helper function to print all key value pairs stored in the hashmap.
+ */
 void printhm(hashmap *hm);
 
 typedef struct graph graph;
